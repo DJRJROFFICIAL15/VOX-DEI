@@ -6,7 +6,11 @@
    - Sin contenido aún: usa "esquema": ["tema 1", "tema 2"]
    Usa &lt; y &gt; para marcadores como &lt;TU_ID_CLIENTE&gt;. */
 window.ALMA_DOCS = {
-  SITIO: "../ALMA_XDR_VOX_DEI_v12.html",
+  SITIO: "../index.html",
+  pdfs: {
+    usuario: { titulo: "Manual de Usuario", desc: "Portal de cliente: dashboard, alertas, eventos, estadísticas y reportes.", archivo: "PDF/MANUAL_USUARIO.pdf", info: "PDF · 29 páginas" },
+    admin: { titulo: "Manual de Administrador", desc: "Organizaciones, usuarios, roles, agentes, auditoría y mantenimiento.", archivo: "PDF/MANUAL_ADMINISTRADOR.pdf", info: "PDF · 47 páginas" }
+  },
   fases: [
     {
       id: "empezar",
@@ -475,9 +479,43 @@ output {
       cat: "c1",
       fase: "operar",
       aud: ["cliente"],
-      estado: "planeado",
-      desc: "Cómo leer el portal del cliente y la consola SOC: resumen, tipos de ataque, alertas y reportes.",
-      esquema: ["Portal del cliente y consola SOC", "Modo Simple y Modo Avanzado", "Resumen, tipos de ataque y alertas recientes", "Reportes en PDF"]
+      estado: "disponible",
+      pdf: "usuario",
+      desc: `Cómo leer el portal del cliente: dashboard, servidores, alertas, eventos, estadísticas y reportes.`,
+      secciones: [
+        {
+          titulo: "1. Qué es el portal",
+          contenido: `<p>El portal del cliente muestra únicamente los datos de tu organización: estado de seguridad, alertas, eventos, servidores, estadísticas y reportes. Se accede desde el navegador con tu usuario y contraseña; la primera vez que entras con una contraseña temporal el sistema te obliga a cambiarla (mínimo 12 caracteres).</p>`
+        },
+        {
+          titulo: "2. Menú lateral",
+          contenido: `<ul>
+<li><strong>Mi dashboard:</strong> resumen de seguridad y aviso de ataque en curso.</li>
+<li><strong>Mis servidores:</strong> estado de los agentes (conectado, desconectado, sin agente).</li>
+<li><strong>Mis alertas:</strong> detecciones con severidad, regla, técnica MITRE y estado.</li>
+<li><strong>Mis eventos:</strong> registro detallado de red y servidores, con exportación a CSV.</li>
+<li><strong>Mis estadísticas:</strong> embudo de detección, tendencias, mapa de calor y tráfico.</li>
+<li><strong>Mis reportes:</strong> reporte de ataques en PDF y alertas/eventos en CSV.</li>
+</ul>`
+        },
+        {
+          titulo: "3. Leer el dashboard",
+          contenido: `<ul>
+<li><strong>Selector de periodo:</strong> 1 hora, 24 horas, 7 días o todo el historial.</li>
+<li><strong>Banner de ataque:</strong> aparece en rojo o naranja si hubo alertas medias o superiores en los últimos 15 minutos.</li>
+<li><strong>KPIs:</strong> alertas críticas, alertas altas, eventos analizados y servidores conectados, con tendencia contra el periodo anterior.</li>
+<li><strong>Muchos eventos y pocas alertas</strong> indica que el sistema filtra bien el ruido; <strong>pocos eventos y muchas alertas</strong> puede indicar un ataque dirigido.</li>
+</ul>`
+        },
+        {
+          titulo: "4. Atajos de teclado",
+          contenido: `<ul><li><code>/</code> enfoca el buscador.</li><li><code>j</code> / <code>k</code> recorren los eventos de la tabla.</li><li><code>a</code> abre Mis alertas.</li></ul>`
+        },
+        {
+          titulo: "5. Reportes y exportación",
+          contenido: `<p>Desde <strong>Mis reportes</strong> descargas el reporte de ataques en PDF (última hora, 24 horas o 7 días) y las alertas en CSV (hasta 5,000 registros). La exportación de eventos requiere el permiso <code>events:export</code>. Toda exportación queda registrada en la auditoría.</p>`
+        }
+      ]
     },
     {
       id: "agente-instalacion",
@@ -495,9 +533,42 @@ output {
       cat: "c5",
       fase: "operar",
       aud: ["cliente"],
-      estado: "planeado",
-      desc: "Qué significa cada tipo de alerta y qué hacer, qué escalar y cuándo.",
-      esquema: ["Escaneo y reconocimiento", "Fuerza bruta y accesos repetidos", "Denegación de servicio", "Qué hacer, qué escalar y cuándo"]
+      estado: "disponible",
+      pdf: "usuario",
+      desc: `Qué significa cada severidad, el flujo de 5 pasos ante una alerta y cuándo escalar.`,
+      secciones: [
+        {
+          titulo: "1. Severidades",
+          contenido: `<ul>
+<li><strong>Crítica:</strong> ataque real con impacto probable. Atender de inmediato.</li>
+<li><strong>Alta:</strong> ataque claro o intento serio. Revisar hoy.</li>
+<li><strong>Media:</strong> actividad sospechosa. Vigilar y revisar si se repite.</li>
+<li><strong>Baja:</strong> informativa; importa si se combina con otras.</li>
+</ul>`
+        },
+        {
+          titulo: "2. Flujo de 5 pasos",
+          contenido: `<ol>
+<li><strong>Lee el detalle:</strong> abre la regla para ver la explicación "Qué significa" y "Qué hacer".</li>
+<li><strong>Identifica origen y objetivo:</strong> IP de origen (interna o externa) y servidor atacado.</li>
+<li><strong>Revisa los eventos relacionados:</strong> son la evidencia; busca patrones.</li>
+<li><strong>Decide:</strong> si es legítimo, márcala como <em>Falso positivo</em>; si es real, bloquea la IP en tu firewall o escala a tu administrador.</li>
+<li><strong>Documenta:</strong> cambia el estado a <em>En revisión</em> o <em>Cerrada</em> y, si hace falta, abre un incidente.</li>
+</ol>`
+        },
+        {
+          titulo: "3. Estados de una alerta",
+          contenido: `<p><strong>Abierta</strong> (sin revisar), <strong>En revisión</strong> (alguien investiga), <strong>Cerrada</strong> (resuelta) y <strong>Falso positivo</strong> (actividad legítima; deja de contar en KPIs y gráficas).</p>`
+        },
+        {
+          titulo: "4. Cadena de ataque",
+          contenido: `<p>Las alertas se ubican en una fase, de menos a más grave: reconocimiento, acceso inicial, credenciales, persistencia, comando y control (C2) e impacto. Cada alerta incluye las técnicas MITRE ATT&amp;CK asociadas.</p>`
+        },
+        {
+          titulo: "5. Cuándo escalar",
+          contenido: `<ul><li>Un servidor lleva más de 15 minutos desconectado.</li><li>Un servidor sin alertas empieza a generar muchas.</li><li>El banner de ataque persiste o hay alertas críticas.</li><li>El agente cambia entre conectado y desconectado sin motivo.</li></ul>`
+        }
+      ]
     },
     {
       id: "modo-monitoreo",
@@ -534,10 +605,38 @@ output {
       titulo: "Preguntas frecuentes y glosario",
       cat: "c8",
       fase: "referencia",
-      aud: ["preventa"],
-      estado: "planeado",
-      desc: "Respuestas rápidas y definiciones de los términos que usa ALMA.",
-      esquema: ["Preguntas frecuentes", "Glosario: SIEM, XDR, NIDS, SDN, ECS"]
+      aud: ["preventa","cliente"],
+      estado: "disponible",
+      pdf: "usuario",
+      desc: `Respuestas rápidas y definiciones de los términos que usa la plataforma.`,
+      secciones: [
+        {
+          titulo: "Preguntas frecuentes",
+          contenido: `<ul>
+<li><strong>¿Cada cuánto se actualiza el dashboard?</strong> Cada 10 segundos.</li>
+<li><strong>¿Cómo sé si un agente está desconectado?</strong> En Mis servidores aparece en rojo; se considera desconectado si no envía heartbeat en 5 minutos.</li>
+<li><strong>¿Puedo marcar una alerta como falso positivo?</strong> Sí, con el permiso <code>alerts:update</code>.</li>
+<li><strong>¿Qué pasa si pierdo mi contraseña?</strong> Tu administrador te asigna una temporal que debes cambiar al entrar.</li>
+<li><strong>¿Por qué no veo la sección Usuarios?</strong> Solo el Admin de Cliente la tiene.</li>
+<li><strong>¿Qué pasa tras 5 intentos fallidos?</strong> La cuenta se bloquea 15 minutos (valores por defecto).</li>
+</ul>`
+        },
+        {
+          titulo: "Glosario",
+          contenido: `<ul>
+<li><strong>SIEM:</strong> sistema que recopila, analiza y correlaciona eventos de seguridad.</li>
+<li><strong>Evento:</strong> actividad registrada en la red o en un servidor.</li>
+<li><strong>Alerta:</strong> notificación generada cuando un evento cumple una regla.</li>
+<li><strong>Agente:</strong> programa instalado en un servidor que envía eventos al SIEM.</li>
+<li><strong>Heartbeat:</strong> señal periódica que indica que el agente está vivo.</li>
+<li><strong>Suricata:</strong> sensor de red que analiza tráfico con firmas.</li>
+<li><strong>MITRE ATT&amp;CK:</strong> base de conocimiento de tácticas y técnicas de atacantes.</li>
+<li><strong>Falso positivo:</strong> alerta causada por actividad legítima.</li>
+<li><strong>C2:</strong> servidor del atacante que da órdenes al malware.</li>
+<li><strong>Alcance (scope):</strong> qué organizaciones y activos puede ver un usuario.</li>
+</ul>`
+        }
+      ]
     },
     {
       id: "notas-version",
@@ -548,6 +647,113 @@ output {
       estado: "planeado",
       desc: "Cambios entre versiones y compatibilidad entre componentes.",
       esquema: ["Cambios por versión", "Matriz de compatibilidad"]
+    },
+    {
+      id: "admin-usuarios-roles",
+      titulo: "Administración de usuarios, roles y alcance",
+      cat: "c1",
+      fase: "configurar",
+      aud: ["cliente"],
+      estado: "disponible",
+      pdf: "admin",
+      desc: `Organizaciones, usuarios, roles personalizados, alcance y reglas contra escalada de privilegios.`,
+      secciones: [
+        {
+          titulo: "1. Modelo de seguridad",
+          contenido: `<p>El acceso se controla con tres conceptos: <strong>usuario</strong> (cuenta con credenciales), <strong>rol</strong> (conjunto de permisos; cada usuario tiene exactamente uno) y <strong>alcance</strong> (qué organizaciones y activos ve). Cada consulta a OpenSearch se filtra por el alcance del usuario y ningún parámetro de la URL puede saltarse ese filtro.</p>`
+        },
+        {
+          titulo: "2. Organizaciones (solo superadmin)",
+          contenido: `<ul><li>Se crean en <strong>Clientes y organizaciones</strong> con nombre, correo de contacto y notas internas.</li><li>El nombre es único.</li><li><strong>Suspender</strong> cierra las sesiones de sus usuarios y conserva los datos; <strong>reactivar</strong> devuelve el acceso en el siguiente inicio de sesión.</li></ul>`
+        },
+        {
+          titulo: "3. Usuarios",
+          contenido: `<ul><li>Alta en <strong>Usuarios → Nuevo usuario</strong>: nombre, correo, rol, organización o alcance y contraseña inicial (mínimo 12 caracteres, con cambio obligatorio).</li><li>Se puede editar, bloquear/desbloquear, restablecer contraseña y cerrar sesiones. Al cambiar rol o alcance se cierran sus sesiones.</li><li>No puedes cambiar tu propio rol, bloquearte, ni bloquear o degradar al último superadministrador activo.</li></ul>`
+        },
+        {
+          titulo: "4. Roles y permisos",
+          contenido: `<p>Roles del sistema: <code>superadmin</code>, <code>analyst</code> y <code>client</code> (no editables). Puedes crear roles propios con un subconjunto de tus permisos, por ejemplo:</p>
+<ul><li><strong>Auditor:</strong> <code>dashboard:read</code>, <code>events:read</code>, <code>events:export</code>, <code>alerts:read</code>, <code>statistics:read</code>, <code>reports:read</code>, <code>reports:export</code>, <code>assets:read</code>.</li><li><strong>Administrador de cliente:</strong> los del rol client más <code>users:*</code> y <code>roles:read</code>/<code>roles:manage</code>.</li></ul>
+<p>No se puede borrar un rol que tenga usuarios asignados.</p>`
+        },
+        {
+          titulo: "5. Anti escalada de privilegios",
+          contenido: `<p>Nadie puede otorgar un permiso que no tiene, un admin de cliente solo gestiona usuarios de su organización y no puede restablecer la contraseña de alguien con más permisos. Estas reglas se validan en el servidor, no en el navegador.</p>`
+        },
+        {
+          titulo: "6. Alcance",
+          contenido: `<p>Hay tres formas: <code>scope:global</code> (todo, solo superadmin), por organización o por activo. Un usuario sin alcance asignado puede iniciar sesión pero no verá datos.</p>`
+        }
+      ]
+    },
+    {
+      id: "admin-agentes-activos",
+      titulo: "Activos y agentes: inventario y enrolamiento",
+      cat: "c2",
+      fase: "instalar",
+      aud: ["cliente"],
+      estado: "disponible",
+      pdf: "admin",
+      desc: `Inventario de activos, tokens de enrolamiento, aprobación, revocación y rotación de credenciales.`,
+      secciones: [
+        {
+          titulo: "1. Inventario de activos",
+          contenido: `<p>Cada activo tiene organización, hostname, tipo, sistema operativo, ID de agente, IPs y estado. El inventario es la base del aislamiento: los eventos de agente se asignan a la organización de su activo, y los eventos de red (Suricata) a la del activo cuya IP coincida con el origen o destino. Si un activo no está en el inventario, solo lo ve quien tenga <code>scope:global</code>.</p>`
+        },
+        {
+          titulo: "2. Registrar, editar y retirar",
+          contenido: `<p>Se registra en <strong>Servidores y agentes</strong>. Al cambiar la organización de un activo, el historial no se reasigna. En lugar de borrar, conviene usar el estado <strong>Retirado</strong>: deja de recibir datos pero conserva el historial bien asignado.</p>`
+        },
+        {
+          titulo: "3. Enrolar un agente",
+          contenido: `<p>Se genera un token de un solo uso (validez de 1 hora, 24 horas o 7 días), con la opción de exigir aprobación. El token solo se muestra una vez.</p>
+<div class="cmd">docker compose exec web python manage.py enrollment-token --hostname srv-01 --hours 24</div>`
+        },
+        {
+          titulo: "4. Estados del agente",
+          contenido: `<ul><li><strong>Pendiente:</strong> enrolado, esperando aprobación; no envía eventos.</li><li><strong>Conectado:</strong> envía heartbeats.</li><li><strong>Desconectado:</strong> sin heartbeat en 5 minutos.</li><li><strong>Revocado:</strong> no puede enviar eventos y no se reactiva; hay que enrolar uno nuevo.</li></ul><p>Con <strong>Rotar credencial</strong> el agente cambia su credencial en el siguiente heartbeat; úsalo si sospechas que fue comprometida.</p>`
+        },
+        {
+          titulo: "5. Buenas prácticas",
+          contenido: `<ul><li>Registra todos los servidores, incluso sin agente.</li><li>Mantén las IPs actualizadas.</li><li>Usa nombres de host consistentes.</li><li>Revisa periódicamente los agentes desconectados.</li></ul>`
+        }
+      ]
+    },
+    {
+      id: "admin-auditoria-mantenimiento",
+      titulo: "Auditoría, almacenamiento y mantenimiento",
+      cat: "c5",
+      fase: "operar",
+      aud: ["cliente"],
+      estado: "disponible",
+      pdf: "admin",
+      desc: `Auditoría administrativa, política de acceso, retención de datos, copias de seguridad y revisiones periódicas.`,
+      secciones: [
+        {
+          titulo: "1. Auditoría",
+          contenido: `<p>Registra inicios de sesión, cambios en organizaciones, usuarios, roles, activos, agentes y reglas, cambios de configuración, exportaciones, limpiezas de datos y accesos denegados. Nunca guarda contraseñas ni tokens. Se filtra por acción, usuario, resultado y periodo, y se conserva indefinidamente en MongoDB.</p>`
+        },
+        {
+          titulo: "2. Investigar un cambio sospechoso",
+          contenido: `<p><strong>Usuario no autorizado:</strong> filtra por la acción <code>user.create</code> y revisa quién lo creó, cuándo y desde qué IP. <strong>Acceso a otra organización:</strong> filtra por resultado <em>Denegado</em>.</p>`
+        },
+        {
+          titulo: "3. Política de acceso (superadmin)",
+          contenido: `<p>Por defecto: 5 intentos fallidos, bloqueo de 15 minutos y sesiones de 8 horas. Los cambios aplican a nuevos intentos y nuevas sesiones.</p>`
+        },
+        {
+          titulo: "4. Almacenamiento",
+          contenido: `<p>Los eventos de red y de agentes se retienen 30 días; alertas y heartbeats, de forma indefinida. Desde Fuentes de datos → Limpieza puedes borrar ruido, borrar por antigüedad y compactar para recuperar espacio en disco.</p>`
+        },
+        {
+          titulo: "5. Comandos de mantenimiento",
+          contenido: `<div class="cmd">docker compose ps<br>docker compose logs opensearch<br>docker compose exec web python manage.py status</div><p>Respalda MongoDB con <code>mongodump</code>, OpenSearch con snapshots y copia <code>.env</code>, <code>docker-compose.yml</code>, <code>detection/rules/</code>, <code>suricata/</code> y <code>nginx/certs/</code>.</p>`
+        },
+        {
+          titulo: "6. Revisiones periódicas",
+          contenido: `<ul><li><strong>Diaria:</strong> sensor, agentes, alertas críticas y espacio en disco.</li><li><strong>Semanal:</strong> auditoría de 7 días, agentes desconectados y reglas ruidosas.</li><li><strong>Mensual:</strong> política de acceso, roles, retención y copia de seguridad.</li><li><strong>Trimestral:</strong> inventario, organizaciones y usuarios, actualización.</li></ul>`
+        }
+      ]
     }
   ]
 };
