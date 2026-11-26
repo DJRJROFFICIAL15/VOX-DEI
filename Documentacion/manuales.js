@@ -481,39 +481,53 @@ output {
       aud: ["cliente"],
       estado: "disponible",
       pdf: "usuario",
-      desc: `Cómo leer el portal del cliente: dashboard, servidores, alertas, eventos, estadísticas y reportes.`,
+      desc: `Recorrido por el portal del cliente: acceso, dashboard, servidores, exposición y reportes.`,
       secciones: [
         {
-          titulo: "1. Qué es el portal",
-          contenido: `<p>El portal del cliente muestra únicamente los datos de tu organización: estado de seguridad, alertas, eventos, servidores, estadísticas y reportes. Se accede desde el navegador con tu usuario y contraseña; la primera vez que entras con una contraseña temporal el sistema te obliga a cambiarla (mínimo 12 caracteres).</p>`
+          titulo: "1. Acceso al portal",
+          contenido: `<p>Abre la dirección del portal e introduce tu <strong>correo o usuario</strong> y tu <strong>contraseña</strong>; el icono del ojo muestra u oculta la contraseña. Pulsa <strong>Entrar</strong>. Si es tu primer acceso con una contraseña temporal, el sistema te pedirá cambiarla (mínimo 12 caracteres).</p><figure class="fg"><a href="img/portal/portal-01-login.webp" target="_blank" rel="noopener"><img src="img/portal/portal-01-login.webp" alt="Pantalla de inicio de sesión de VOX DEI" loading="lazy"></a><figcaption>Pantalla de inicio de sesión.</figcaption></figure>`
         },
         {
-          titulo: "2. Menú lateral",
-          contenido: `<ul>
-<li><strong>Mi dashboard:</strong> resumen de seguridad y aviso de ataque en curso.</li>
-<li><strong>Mis servidores:</strong> estado de los agentes (conectado, desconectado, sin agente).</li>
-<li><strong>Mis alertas:</strong> detecciones con severidad, regla, técnica MITRE y estado.</li>
-<li><strong>Mis eventos:</strong> registro detallado de red y servidores, con exportación a CSV.</li>
-<li><strong>Mis estadísticas:</strong> embudo de detección, tendencias, mapa de calor y tráfico.</li>
-<li><strong>Mis reportes:</strong> reporte de ataques en PDF y alertas/eventos en CSV.</li>
-</ul>`
+          titulo: "2. El dashboard",
+          contenido: `<p>Es la primera pantalla. Arriba aparecen el buscador (atajo <code>/</code>), el indicador de estado ("Sin ataques activos" cuando no hay alertas medias o superiores recientes), la campana con el número de alertas pendientes y tu menú de usuario.</p>
+<ul><li><strong>Selector de periodo:</strong> 1 h, 24 h, 7 d o Todo, y el botón <strong>PDF</strong> para descargar el reporte.</li><li><strong>Cifras clave:</strong> alertas críticas, alertas altas, eventos analizados y servidores conectados, con su tendencia contra el periodo anterior.</li><li><strong>Alertas por hora y severidad:</strong> pulsa una barra para ver sus alertas.</li><li><strong>Necesitan atención:</strong> lista de alertas con severidad, número de repeticiones, explicación y los botones <em>Ver</em>, <em>Posponer</em> y <em>Leer más</em>.</li></ul><figure class="fg"><a href="img/portal/portal-02-dashboard-resumen.webp" target="_blank" rel="noopener"><img src="img/portal/portal-02-dashboard-resumen.webp" alt="Dashboard con resumen de 24 horas" loading="lazy"></a><figcaption>Resumen de 24 horas, alertas por hora y panel "Necesitan atención".</figcaption></figure><figure class="fg"><a href="img/portal/portal-25-dashboard-atencion.webp" target="_blank" rel="noopener"><img src="img/portal/portal-25-dashboard-atencion.webp" alt="Panel Necesitan atención desplazado" loading="lazy"></a><figcaption>El panel de la derecha se desplaza: las alertas más antiguas aparecen al bajar.</figcaption></figure>`
         },
         {
-          titulo: "3. Leer el dashboard",
-          contenido: `<ul>
-<li><strong>Selector de periodo:</strong> 1 hora, 24 horas, 7 días o todo el historial.</li>
-<li><strong>Banner de ataque:</strong> aparece en rojo o naranja si hubo alertas medias o superiores en los últimos 15 minutos.</li>
-<li><strong>KPIs:</strong> alertas críticas, alertas altas, eventos analizados y servidores conectados, con tendencia contra el periodo anterior.</li>
-<li><strong>Muchos eventos y pocas alertas</strong> indica que el sistema filtra bien el ruido; <strong>pocos eventos y muchas alertas</strong> puede indicar un ataque dirigido.</li>
-</ul>`
+          titulo: "3. Topología de ataques, tipos y puertos",
+          contenido: `<p>La <strong>Topología de ataques</strong> dibuja de izquierda a derecha el origen y el objetivo de cada flujo; el grosor de la línea indica cuántas alertas tiene y el color su severidad. Pasa el cursor para aislar un flujo, pulsa un nodo o flujo para filtrar el dashboard, y usa <code>Ctrl</code> + rueda para acercar.</p><figure class="fg"><a href="img/portal/portal-03-topologia-ataques.webp" target="_blank" rel="noopener"><img src="img/portal/portal-03-topologia-ataques.webp" alt="Topología de ataques origen a objetivo" loading="lazy"></a><figcaption>Topología de ataques: origen → objetivo en 24 horas.</figcaption></figure><p>Debajo están <strong>Tipos de ataque</strong> (con el detalle por categoría), <strong>Puertos atacados</strong> (los escaneos se resumen aparte para que no tapen los ataques dirigidos) y <strong>Orígenes geográficos</strong>, que solo ubica IPs públicas.</p><figure class="fg"><a href="img/portal/portal-04-tipos-puertos-origenes.webp" target="_blank" rel="noopener"><img src="img/portal/portal-04-tipos-puertos-origenes.webp" alt="Tipos de ataque, puertos atacados y orígenes geográficos" loading="lazy"></a><figcaption>Tipos de ataque, puertos atacados y mapa de orígenes.</figcaption></figure>`
         },
         {
-          titulo: "4. Atajos de teclado",
+          titulo: "4. Eventos en tiempo real",
+          contenido: `<p><strong>Eventos por tipo</strong> grafica conexiones, DNS, web, alertas IDS y hosts por hora. Debajo, <strong>Eventos en tiempo real</strong> lista hora, tipo, fuente, destino, descripción y severidad. Con <strong>Pausar</strong> congelas la tabla para leer con calma y con <strong>Buscar y filtrar</strong> abres el buscador de eventos.</p><figure class="fg"><a href="img/portal/portal-05-eventos-tiempo-real.webp" target="_blank" rel="noopener"><img src="img/portal/portal-05-eventos-tiempo-real.webp" alt="Eventos por tipo y eventos en tiempo real" loading="lazy"></a><figcaption>Gráfica de eventos por tipo y tabla en tiempo real.</figcaption></figure>`
+        },
+        {
+          titulo: "5. Menú lateral",
+          contenido: `<p>Pulsa el icono de las tres rayas para abrir el menú. Incluye: <strong>Mi dashboard</strong>, <strong>Mis servidores</strong>, <strong>Exposición</strong>, <strong>Mis alertas</strong>, <strong>Mapa de amenazas</strong>, <strong>Mis eventos</strong>, <strong>Mis estadísticas</strong>, <strong>Machine Learning</strong>, <strong>Mis reportes</strong> y, en Cuenta, <strong>Mi cuenta</strong>.</p><figure class="fg"><a href="img/portal/portal-06-menu-lateral.webp" target="_blank" rel="noopener"><img src="img/portal/portal-06-menu-lateral.webp" alt="Menú lateral del portal" loading="lazy"></a><figcaption>Menú lateral desplegado.</figcaption></figure>`
+        },
+        {
+          titulo: "6. Mis servidores",
+          contenido: `<p>Muestra el estado de cada agente: conectado (<em>En línea</em>) si envió su heartbeat en los últimos 2 minutos, el servidor y el agente, el sistema operativo, las IPs, la última comunicación y los eventos y alertas de las últimas 24 horas. Los números son enlaces: te llevan a los eventos o alertas de ese servidor.</p><figure class="fg"><a href="img/portal/portal-07-mis-servidores.webp" target="_blank" rel="noopener"><img src="img/portal/portal-07-mis-servidores.webp" alt="Página Mis servidores" loading="lazy"></a><figcaption>Estado de los agentes y actividad de 24 horas.</figcaption></figure>`
+        },
+        {
+          titulo: "7. Exposición",
+          contenido: `<p>Resume la superficie de ataque de tus servidores a partir de una "foto" periódica que toma el agente:</p>
+<ul><li><strong>Servidores supervisados:</strong> riesgo, estado del agente, última foto, puertos, expuestos, hallazgos y último cambio.</li><li><strong>Servicios y protocolos expuestos:</strong> puertos accesibles desde la red.</li><li><strong>Hallazgos y riesgos:</strong> reglas fijas del SIEM sobre servicios peligrosos expuestos, SSH, cortafuegos y procesos.</li><li><strong>Cambios en la superficie:</strong> últimos 7 días; la primera foto de cada servidor es la línea base y no cuenta como cambio.</li></ul><figure class="fg"><a href="img/portal/portal-08-exposicion.webp" target="_blank" rel="noopener"><img src="img/portal/portal-08-exposicion.webp" alt="Página de exposición" loading="lazy"></a><figcaption>Si no hay fotos todavía, las tarjetas indican que no hay datos.</figcaption></figure>`
+        },
+        {
+          titulo: "8. Mapa de amenazas",
+          contenido: `<p>Ubica en un mapa las IP de origen de las alertas. Arriba hay cinco contadores: alertas, alertas con ubicación, alertas sin datos geográficos, IP de origen y países. En el mapa, el tamaño de cada círculo indica cuántas alertas tiene, el color es la severidad máxima y los números agrupan ubicaciones cercanas. A la derecha, <strong>Ubicaciones</strong> lista las tres con más alertas (elige una para ver sus IP) y <strong>Por país</strong> las agrupa.</p><figure class="fg"><a href="img/portal/portal-22-mapa-amenazas.webp" target="_blank" rel="noopener"><img src="img/portal/portal-22-mapa-amenazas.webp" alt="Mapa de amenazas con ubicaciones y países" loading="lazy"></a><figcaption>Mapa de origen de las alertas, ubicaciones y desglose por país.</figcaption></figure><p><strong>Cómo interpretarlo:</strong> la ubicación sale de una base GeoIP local y es una estimación del punto de salida a internet de la IP, no la posición de una persona. VPN, proxies, NAT o Tor la cambian, y en una inundación con orígenes falsificados los países no significan nada. Las IP internas, reservadas o sin datos no se dibujan y se cuentan en "Sin datos geográficos".</p>`
+        },
+        {
+          titulo: "9. Mis eventos",
+          contenido: `<p>Es el registro detallado de todo lo que ven Suricata y los agentes. Indica cuántos eventos hay en el periodo y la página en la que estás. Busca por IP, dominio, firma, usuario, hash o archivo, y filtra por <strong>Tipo</strong>, <strong>Fuente</strong>, <strong>Severidad (IDS)</strong>, <strong>Periodo</strong> y <strong>Servidor</strong>; pulsa <strong>Buscar</strong>. La casilla <strong>En vivo</strong> actualiza la tabla cada 10 segundos. Al seleccionar una fila, el panel <strong>Detalle del evento</strong> muestra todos sus campos.</p><figure class="fg"><a href="img/portal/portal-23-mis-eventos.webp" target="_blank" rel="noopener"><img src="img/portal/portal-23-mis-eventos.webp" alt="Página Mis eventos" loading="lazy"></a><figcaption>Filtros, tabla de eventos y panel de detalle.</figcaption></figure><p><strong>Ejemplo:</strong> si recibes una alerta de fuerza bruta, busca la IP de origen aquí para ver todos sus intentos y no solo los que generaron la alerta.</p>`
+        },
+        {
+          titulo: "10. Reportes",
+          contenido: `<p>En <strong>Mis reportes</strong> descargas el <strong>reporte de ataques en PDF</strong> (alertas por severidad, tipos, cadena de ataque, orígenes y recomendaciones) y las <strong>alertas en CSV</strong> (hasta 5,000, con fecha, severidad, estado, regla, tipo y técnica MITRE). Elige el periodo y pulsa <em>Descargar</em>. Cada descarga queda registrada.</p><figure class="fg"><a href="img/portal/portal-19-mis-reportes.webp" target="_blank" rel="noopener"><img src="img/portal/portal-19-mis-reportes.webp" alt="Página Mis reportes" loading="lazy"></a><figcaption>Tarjetas de descarga de PDF y CSV.</figcaption></figure><figure class="fg"><a href="img/portal/portal-20-reporte-pdf.webp" target="_blank" rel="noopener"><img src="img/portal/portal-20-reporte-pdf.webp" alt="Ejemplo de reporte de ataques en PDF" loading="lazy"></a><figcaption>Primera página del reporte PDF de 24 horas.</figcaption></figure>`
+        },
+        {
+          titulo: "11. Atajos de teclado",
           contenido: `<ul><li><code>/</code> enfoca el buscador.</li><li><code>j</code> / <code>k</code> recorren los eventos de la tabla.</li><li><code>a</code> abre Mis alertas.</li></ul>`
-        },
-        {
-          titulo: "5. Reportes y exportación",
-          contenido: `<p>Desde <strong>Mis reportes</strong> descargas el reporte de ataques en PDF (última hora, 24 horas o 7 días) y las alertas en CSV (hasta 5,000 registros). La exportación de eventos requiere el permiso <code>events:export</code>. Toda exportación queda registrada en la auditoría.</p>`
         }
       ]
     },
@@ -535,10 +549,23 @@ output {
       aud: ["cliente"],
       estado: "disponible",
       pdf: "usuario",
-      desc: `Qué significa cada severidad, el flujo de 5 pasos ante una alerta y cuándo escalar.`,
+      desc: `Dónde ver las alertas, el correo de aviso, qué significa cada severidad y cómo responder.`,
       secciones: [
         {
-          titulo: "1. Severidades",
+          titulo: "1. Dónde ver las alertas",
+          contenido: `<p>En <strong>Mis alertas</strong> las cuatro tarjetas (Críticas, Altas, Medias y Bajas) muestran el total, su porcentaje y la tendencia de 7 días; al pulsar una filtras por esa severidad. Los filtros permiten buscar por texto, severidad, estado, tipo de ataque, origen, periodo y servidor. La tabla indica fecha, severidad, tipo, regla, detalle, técnica MITRE y estado, y el botón <strong>Exportar CSV</strong> descarga lo filtrado.</p><figure class="fg"><a href="img/portal/portal-09-mis-alertas.webp" target="_blank" rel="noopener"><img src="img/portal/portal-09-mis-alertas.webp" alt="Página Mis alertas" loading="lazy"></a><figcaption>Tarjetas por severidad, filtros y tabla de alertas.</figcaption></figure>`
+        },
+        {
+          titulo: "2. Aviso por correo",
+          contenido: `<p>Cuando hay alertas importantes el SIEM envía un correo con el asunto <em>[VOX DEI] N alta: …</em>. Incluye <strong>Qué pasa</strong> y <strong>Qué hacer</strong> en lenguaje claro, además del equipo, la organización, el destino, la técnica, la fase, el MITRE ATT&amp;CK, la regla, el registro que la originó, la primera vez y cuántas repeticiones se agruparon.</p><figure class="fg"><a href="img/portal/portal-10-correo-alerta.webp" target="_blank" rel="noopener"><img src="img/portal/portal-10-correo-alerta.webp" alt="Correo de alerta de VOX DEI" loading="lazy"></a><figcaption>Ejemplo de correo con explicación y datos de la alerta.</figcaption></figure>`
+        },
+        {
+          titulo: "3. Página Ataques y cadena de ataque",
+          contenido: `<p>Si tu rol tiene el permiso <code>attacks:read</code> (ver ataques, cadena y perfil de origen), tendrás la página <strong>Ataques</strong>. Se actualiza cada 30 segundos y permite elegir 1 h, 24 h o 7 d, además de descargar el <strong>Reporte PDF</strong>.</p>
+<ul><li><strong>Cadena de ataque:</strong> seis fases, de menor a mayor gravedad, cada una con su cuenta y su código MITRE: reconocimiento (TA0043), acceso inicial (TA0001), credenciales (TA0006), persistencia (TA0003), comando y control (TA0011) e impacto (TA0040). Pulsa una fase para filtrar; más color significa más actividad.</li><li><strong>Resumen en lenguaje claro:</strong> la página indica cuál es la fase más avanzada observada y si por ahora son solo intentos.</li><li><strong>Línea de tiempo de ataques:</strong> pulsa una barra para ver sus alertas o una fase de la leyenda para ocultarla.</li></ul><figure class="fg"><a href="img/portal/portal-24-ataques-cadena.webp" target="_blank" rel="noopener"><img src="img/portal/portal-24-ataques-cadena.webp" alt="Página Ataques con la cadena de ataque" loading="lazy"></a><figcaption>Cadena de ataque por fases y línea de tiempo.</figcaption></figure>`
+        },
+        {
+          titulo: "4. Severidades",
           contenido: `<ul>
 <li><strong>Crítica:</strong> ataque real con impacto probable. Atender de inmediato.</li>
 <li><strong>Alta:</strong> ataque claro o intento serio. Revisar hoy.</li>
@@ -547,7 +574,7 @@ output {
 </ul>`
         },
         {
-          titulo: "2. Flujo de 5 pasos",
+          titulo: "5. Flujo de 5 pasos",
           contenido: `<ol>
 <li><strong>Lee el detalle:</strong> abre la regla para ver la explicación "Qué significa" y "Qué hacer".</li>
 <li><strong>Identifica origen y objetivo:</strong> IP de origen (interna o externa) y servidor atacado.</li>
@@ -557,16 +584,16 @@ output {
 </ol>`
         },
         {
-          titulo: "3. Estados de una alerta",
+          titulo: "6. Estados de una alerta",
           contenido: `<p><strong>Abierta</strong> (sin revisar), <strong>En revisión</strong> (alguien investiga), <strong>Cerrada</strong> (resuelta) y <strong>Falso positivo</strong> (actividad legítima; deja de contar en KPIs y gráficas).</p>`
         },
         {
-          titulo: "4. Cadena de ataque",
+          titulo: "7. Cadena de ataque",
           contenido: `<p>Las alertas se ubican en una fase, de menos a más grave: reconocimiento, acceso inicial, credenciales, persistencia, comando y control (C2) e impacto. Cada alerta incluye las técnicas MITRE ATT&amp;CK asociadas.</p>`
         },
         {
-          titulo: "5. Cuándo escalar",
-          contenido: `<ul><li>Un servidor lleva más de 15 minutos desconectado.</li><li>Un servidor sin alertas empieza a generar muchas.</li><li>El banner de ataque persiste o hay alertas críticas.</li><li>El agente cambia entre conectado y desconectado sin motivo.</li></ul>`
+          titulo: "8. Cuándo escalar",
+          contenido: `<ul><li>Un servidor lleva más de 15 minutos desconectado.</li><li>Un servidor sin alertas empieza a generar muchas.</li><li>El indicador de ataque persiste o hay alertas críticas.</li><li>El agente cambia entre conectado y desconectado sin motivo.</li></ul>`
         }
       ]
     },
@@ -742,16 +769,144 @@ output {
           contenido: `<p>Por defecto: 5 intentos fallidos, bloqueo de 15 minutos y sesiones de 8 horas. Los cambios aplican a nuevos intentos y nuevas sesiones.</p>`
         },
         {
-          titulo: "4. Almacenamiento",
+          titulo: "4. Fuentes de datos: sensor y agentes",
+          contenido: `<p>La página <strong>Fuentes de datos</strong> tiene dos pestañas, <em>Sensor</em> y <em>Agentes</em>. En el sensor Suricata verás su estado (activo), la captura, cuándo llegó el último evento, los eventos de la última hora y el camino que siguen: <code>eve.json → Fluent Bit → OpenSearch (suricata-*)</code>. También lista los tipos de evento de la última hora (flow, tls, dns, alert).</p>
+<p><strong>Protecciones activas:</strong></p>
+<ul><li><strong>Vigilante:</strong> si Suricata deja de analizar, lo reinicia solo en aproximadamente 1 minuto.</li><li><strong>Filtro de inundaciones:</strong> descarta conexiones falsificadas y limita las conexiones a 200 por segundo; las alertas nunca se limitan.</li><li><strong>Rotación de eve.json:</strong> al pasar de 300 MB se rota y solo se guarda una copia.</li></ul>
+<p>Más abajo, <strong>Agentes en hosts</strong> resume cuántos agentes están en línea (por ejemplo, 1 de 1).</p><figure class="fg"><a href="img/admin/admin-01-fuentes-datos.webp" target="_blank" rel="noopener"><img src="img/admin/admin-01-fuentes-datos.webp" alt="Página Fuentes de datos" loading="lazy"></a><figcaption>Estado del sensor de red Suricata y de los agentes.</figcaption></figure>`
+        },
+        {
+          titulo: "5. Almacenamiento",
           contenido: `<p>Los eventos de red y de agentes se retienen 30 días; alertas y heartbeats, de forma indefinida. Desde Fuentes de datos → Limpieza puedes borrar ruido, borrar por antigüedad y compactar para recuperar espacio en disco.</p>`
         },
         {
-          titulo: "5. Comandos de mantenimiento",
+          titulo: "6. Comandos de mantenimiento",
           contenido: `<div class="cmd">docker compose ps<br>docker compose logs opensearch<br>docker compose exec web python manage.py status</div><p>Respalda MongoDB con <code>mongodump</code>, OpenSearch con snapshots y copia <code>.env</code>, <code>docker-compose.yml</code>, <code>detection/rules/</code>, <code>suricata/</code> y <code>nginx/certs/</code>.</p>`
         },
         {
-          titulo: "6. Revisiones periódicas",
+          titulo: "7. Revisiones periódicas",
           contenido: `<ul><li><strong>Diaria:</strong> sensor, agentes, alertas críticas y espacio en disco.</li><li><strong>Semanal:</strong> auditoría de 7 días, agentes desconectados y reglas ruidosas.</li><li><strong>Mensual:</strong> política de acceso, roles, retención y copia de seguridad.</li><li><strong>Trimestral:</strong> inventario, organizaciones y usuarios, actualización.</li></ul>`
+        }
+      ]
+    },
+    {
+      id: "sdn-panel-noc",
+      titulo: "Panel ALMA SDN NOC: topología, telemetría y políticas",
+      cat: "c2",
+      fase: "operar",
+      aud: ["cliente"],
+      estado: "disponible",
+      desc: `Recorrido paso a paso por el panel SDN: topología, tráfico, controlador OS-Ken, telemetría, VXLAN, políticas y historial.`,
+      secciones: [
+        {
+          titulo: "1. Qué es el panel y cómo se entra",
+          contenido: `<p>ALMA SDN NOC es el panel para vigilar la red definida por software: el controlador OS-Ken, los switches Open vSwitch y el túnel VXLAN. El menú lateral tiene cuatro secciones: <strong>Topología</strong>, <strong>Monitoreo</strong>, <strong>Infraestructura</strong> y <strong>Administración SDN</strong>.</p>
+<p>Hay dos modos, y se ven en la tarjeta "Modo" de la parte superior:</p>
+<ul><li><strong>Lectura:</strong> sin sesión. Solo permite consultar; el panel lateral pide la contraseña administrativa.</li><li><strong>Administración:</strong> tras pulsar <em>Iniciar sesión</em> con la contraseña administrativa. Habilita la aplicación de políticas OpenFlow y el botón <em>Cerrar sesión</em>.</li></ul><figure class="fg"><a href="img/sdn/sdn-01-topologia-lectura.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-01-topologia-lectura.webp" alt="Topología SDN en modo lectura" loading="lazy"></a><figcaption>Modo lectura: el panel lateral pide la contraseña administrativa.</figcaption></figure><figure class="fg"><a href="img/sdn/sdn-02-topologia-administracion.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-02-topologia-administracion.webp" alt="Topología SDN en modo administración" loading="lazy"></a><figcaption>Modo administración: la tarjeta indica "Políticas OpenFlow - acceso autenticado".</figcaption></figure>`
+        },
+        {
+          titulo: "2. Leer la topología",
+          contenido: `<p>Arriba hay cuatro tarjetas: switches conectados (se actualiza cada 5 segundos), estado del controlador (OpenFlow, TCP 6653), modo de acceso y políticas activas.</p>
+<ol><li>En la parte superior está el controlador <strong>Debian - alma-services</strong> (OS-Ken, OpenFlow 1.3, GCP).</li><li>Debajo, los dos switches <strong>OVS Ikkiland</strong> y <strong>OVS node1</strong>, cada uno con su DPID y estado.</li><li>Entre ellos, el enlace <strong>VXLAN - VNI 100</strong> con la tasa inferida en cada sentido.</li><li>Abajo, los hosts con su IP, puerto, TX y RX. Verde significa "Tráfico observado"; "Sin tráfico reciente" indica un host callado.</li></ol>
+<p>Las líneas punteadas son <strong>sesiones de control OpenFlow</strong>, no enlaces de datos.</p>`
+        },
+        {
+          titulo: "3. Topología completa e inspector de dispositivos",
+          contenido: `<ol><li>Pulsa <strong>Ver topología completa</strong> (arriba a la derecha de la tarjeta de topología).</li><li>Se abre una vista ampliada con ALMA-SERVICES, IKKILAND y NODE1, cada uno con su estado.</li><li>Selecciona un switch para ver en el <strong>Inspector de dispositivos</strong> su DPID, estado y telemetría.</li><li>Con <strong>Ver telemetría completa</strong> saltas al detalle del switch.</li></ol><figure class="fg"><a href="img/sdn/sdn-03-topologia-completa.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-03-topologia-completa.webp" alt="Topología completa sin selección" loading="lazy"></a><figcaption>Vista ampliada antes de seleccionar un switch; el inspector aparece vacío.</figcaption></figure><figure class="fg"><a href="img/sdn/sdn-04-inspector-switch.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-04-inspector-switch.webp" alt="Inspector con IKKILAND seleccionado" loading="lazy"></a><figcaption>Con IKKILAND seleccionado se muestran DPID, estado y telemetría.</figcaption></figure>`
+        },
+        {
+          titulo: "4. Trayectoria del tráfico",
+          contenido: `<p>Dentro de la topología completa, la tarjeta <strong>Trayectoria del tráfico</strong> dibuja el recorrido de una comunicación: hosts, puertos, switches y el túnel VXLAN. Selecciona una comunicación de la tabla de conexiones; con <strong>−</strong>, <strong>+</strong> y el porcentaje ajustas el zoom, y <strong>Limpiar ruta</strong> borra la selección.</p><figure class="fg"><a href="img/sdn/sdn-05-trayectoria-trafico.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-05-trayectoria-trafico.webp" alt="Trayectoria del tráfico" loading="lazy"></a><figcaption>Sin comunicación seleccionada se muestra la estructura base: dos OVS y cuatro hosts.</figcaption></figure>`
+        },
+        {
+          titulo: "5. Tráfico en tiempo real",
+          contenido: `<p>Muestra la velocidad de paquetes recibidos (RX) y enviados (TX). El selector <strong>Paquetes/s | Mbps</strong> cambia la unidad. En la gráfica, RX va en azul y TX en plata discontinuo; también se indica el valor máximo y cuántas mediciones se muestran.</p><figure class="fg"><a href="img/sdn/sdn-06-trafico-tiempo-real.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-06-trafico-tiempo-real.webp" alt="Gráfica de tráfico de red en tiempo real" loading="lazy"></a><figcaption>Gráfica en paquetes por segundo con las últimas mediciones.</figcaption></figure>`
+        },
+        {
+          titulo: "6. Conexiones de red",
+          contenido: `<p>La tabla lista cada comunicación observada con origen, destino, protocolo, paquetes, bytes, pps, transferencia, observaciones del destino, trayectoria y un botón <strong>Ver ruta</strong> que la dibuja en la topología. La captura es pasiva, por ventanas de 60 segundos, y <strong>las trayectorias son inferidas</strong>.</p><figure class="fg"><a href="img/sdn/sdn-07-conexiones-red.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-07-conexiones-red.webp" alt="Tabla de conexiones de red" loading="lazy"></a><figcaption>Resumen de la ventana: comunicaciones, paquetes, bytes, pps y kbps.</figcaption></figure>`
+        },
+        {
+          titulo: "7. Controlador y telemetría del switch",
+          contenido: `<p>La tarjeta del controlador muestra framework (OS-Ken), protocolo (OpenFlow 1.3), puerto (TCP 6653) y switches conectados. Más abajo, <strong>Estado de la red SDN</strong> resume el controlador y cada switch.</p><figure class="fg"><a href="img/sdn/sdn-08-controlador-os-ken.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-08-controlador-os-ken.webp" alt="Controlador OS-Ken en línea" loading="lazy"></a><figcaption>Controlador reportado como conectado, con 2 switches.</figcaption></figure><p>En <strong>Telemetría del switch seleccionado</strong> hay dos pestañas, <em>Puertos</em> y <em>Flujos OpenFlow</em>. Se ve cuántos puertos reporta y los paquetes recibidos y enviados por puerto (interno LOCAL, VXLAN hacia Node1, puerto de pruebas y puerto 3).</p><figure class="fg"><a href="img/sdn/sdn-09-telemetria-switch.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-09-telemetria-switch.webp" alt="Telemetría del switch Ikkiland" loading="lazy"></a><figcaption>Los contadores son acumulados, no velocidades.</figcaption></figure><p><strong>Importante:</strong> los contadores son acumulados y el estado "Conectado" de un switch no confirma la conectividad de extremo a extremo.</p>`
+        },
+        {
+          titulo: "8. Monitor VXLAN y políticas OpenFlow",
+          contenido: `<p>El <strong>Monitor VXLAN</strong> muestra los paquetes RX y TX del túnel Ikkiland ↔ Node1 (VNI 100) y si hay tráfico reciente.</p>
+<p>En <strong>Administración SDN</strong> (requiere sesión administrativa) se aplica una política así:</p>
+<ol><li>Elige el <strong>switch</strong>.</li><li>Elige el <strong>tipo de política</strong> (por ejemplo ICMP o TCP).</li><li>Elige la <strong>acción</strong>: Bloquear o Desbloquear.</li><li>Escribe la <strong>IP de origen</strong> y la <strong>IP de destino</strong>.</li><li>Pulsa <strong>Aplicar política</strong>.</li></ol>
+<p>A la derecha, <strong>Redirección automática TCP</strong> muestra el servicio virtual, el modo automático, los servidores principal y secundario, los fallos consecutivos (0/3) y las recuperaciones (0/5).</p><figure class="fg"><a href="img/sdn/sdn-10-vxlan-politicas.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-10-vxlan-politicas.webp" alt="Monitor VXLAN y administración SDN" loading="lazy"></a><figcaption>Monitor VXLAN, formulario de políticas y redirección automática TCP.</figcaption></figure>`
+        },
+        {
+          titulo: "9. Historial de cambios",
+          contenido: `<p>Registro persistente de las operaciones OpenFlow: operaciones totales, confirmadas, sin confirmar y con error. Puedes buscar por IP, switch o política, filtrar por resultado y abrir los <strong>Detalles</strong> de cada fila (fecha, rol, switch, acción, protocolo, origen, destino, puerto y resultado). Revísalo después de aplicar una política para comprobar que quedó <em>Instalada</em> o <em>Eliminada</em>.</p><figure class="fg"><a href="img/sdn/sdn-11-historial-cambios.webp" target="_blank" rel="noopener"><img src="img/sdn/sdn-11-historial-cambios.webp" alt="Historial de cambios OpenFlow" loading="lazy"></a><figcaption>Contadores de operaciones y tabla de bloqueos y desbloqueos.</figcaption></figure>`
+        }
+      ]
+    },
+    {
+      id: "estadisticas-red",
+      titulo: "Estadísticas y tráfico de red",
+      cat: "c4",
+      fase: "operar",
+      aud: ["cliente"],
+      estado: "disponible",
+      pdf: "usuario",
+      desc: `Técnicas, fases de ataque, mapa de calor, orígenes, protocolos, puertos y dominios.`,
+      secciones: [
+        {
+          titulo: "1. Embudo de detección y tipos de ataque",
+          contenido: `<p>La página <strong>Mis estadísticas</strong> se actualiza cada minuto y permite elegir 24 h o 7 d. El embudo <em>De todo el tráfico a lo que importa</em> muestra cómo se reduce el volumen: eventos analizados (lo que vieron Suricata y los agentes), firmas de Suricata (coincidencias con alguna firma), alertas del SIEM (lo que las reglas consideran un ataque) y, al final, las alertas críticas o altas, que son las que hay que atender.</p>
+<p><strong>Tipos de ataque</strong> cuenta ataques y no firmas: si varias firmas detectan la misma conexión, cuenta una sola vez. Se muestra como dona por tipo y en una gráfica por hora.</p><figure class="fg"><a href="img/portal/portal-21-estadisticas-embudo.webp" target="_blank" rel="noopener"><img src="img/portal/portal-21-estadisticas-embudo.webp" alt="Embudo de detección y tipos de ataque" loading="lazy"></a><figcaption>Embudo de detección y tipos de ataque por hora.</figcaption></figure>`
+        },
+        {
+          titulo: "2. Técnicas y puertos atacados",
+          contenido: `<p>En <strong>Mis estadísticas</strong>, <em>Técnicas detectadas</em> cuenta ataques distintos por técnica (por ejemplo anomalía de red o ping de descubrimiento). <em>Puertos atacados</em> muestra los ataques dirigidos a un puerto; los escaneos se resumen debajo, indicando qué IP probó cuántos puertos y cuáles.</p><figure class="fg"><a href="img/portal/portal-11-estadisticas-tecnicas-puertos.webp" target="_blank" rel="noopener"><img src="img/portal/portal-11-estadisticas-tecnicas-puertos.webp" alt="Técnicas detectadas y puertos atacados" loading="lazy"></a><figcaption>Técnicas detectadas y resumen de escaneos de puertos.</figcaption></figure>`
+        },
+        {
+          titulo: "3. Alertas: severidad, fase y reglas",
+          contenido: `<ul><li><strong>Alertas por hora y severidad:</strong> distribución por hora, con opción de ver como tabla.</li><li><strong>Por fase de la cadena de ataque:</strong> de menos a más grave; un atacante que llega a las fases de abajo ya pasó de intentar a conseguir algo.</li><li><strong>Reglas que más alertan:</strong> detecta reglas ruidosas o muy activas.</li><li><strong>¿A qué horas llegan las alertas?:</strong> mapa de calor de los últimos 7 días, útil para ver patrones nocturnos o automatizados.</li></ul><figure class="fg"><a href="img/portal/portal-12-estadisticas-alertas.webp" target="_blank" rel="noopener"><img src="img/portal/portal-12-estadisticas-alertas.webp" alt="Alertas por hora, fase y reglas" loading="lazy"></a><figcaption>Alertas por hora, fase de ataque, reglas y mapa de calor.</figcaption></figure>`
+        },
+        {
+          titulo: "4. Quién ataca y a qué",
+          contenido: `<p><strong>Orígenes con más alertas</strong> marca cada IP como <em>Interna</em> o <em>Externa</em>, y <strong>Equipos más atacados</strong> muestra los destinos. Un origen interno puede ser un equipo comprometido, así que conviene revisarlo aunque no sea una IP pública.</p><figure class="fg"><a href="img/portal/portal-13-estadisticas-origenes.webp" target="_blank" rel="noopener"><img src="img/portal/portal-13-estadisticas-origenes.webp" alt="Orígenes con más alertas y equipos más atacados" loading="lazy"></a><figcaption>Orígenes internos y externos y equipos más atacados.</figcaption></figure>`
+        },
+        {
+          titulo: "5. Tráfico de la red",
+          contenido: `<p>Lo que Suricata ve pasar por la interfaz, para saber qué es normal y notar lo raro:</p>
+<ul><li><strong>Protocolos:</strong> TLS, mDNS, DNS, DHCP… "Sin identificar" son conexiones que no llegaron a intercambiar datos reconocibles.</li><li><strong>Puertos de destino:</strong> los más usados.</li><li><strong>Dominios más consultados:</strong> un pico hacia un dominio desconocido puede indicar malware.</li></ul><figure class="fg"><a href="img/portal/portal-14-estadisticas-trafico.webp" target="_blank" rel="noopener"><img src="img/portal/portal-14-estadisticas-trafico.webp" alt="Protocolos, puertos y dominios" loading="lazy"></a><figcaption>Protocolos, puertos de destino y dominios más consultados.</figcaption></figure>`
+        }
+      ]
+    },
+    {
+      id: "ml-anomalias",
+      titulo: "Machine Learning: detección de anomalías",
+      cat: "c4",
+      fase: "operar",
+      aud: ["cliente"],
+      estado: "disponible",
+      pdf: "usuario",
+      desc: `Cómo funciona el modelo Isolation Forest, cómo leer la puntuación y cómo se compara con las reglas.`,
+      secciones: [
+        {
+          titulo: "1. Qué es y cómo se lee",
+          contenido: `<p>La página <strong>Machine Learning</strong> usa un modelo <em>Isolation Forest</em> que aprende cómo es el tráfico normal de tu red y marca los flujos que se salen del patrón. Complementa a las reglas, porque no necesita conocer el ataque de antemano. El selector 24h, 7d y 30d cambia el periodo y la página se actualiza sola cada minuto.</p>
+<ul><li><strong>Ataques detectados hoy y este mes</strong> (ataques distintos, no firmas repetidas).</li><li><strong>MTTD:</strong> tiempo medio desde el primer evento hasta la alerta.</li><li><strong>Detectado por ML:</strong> qué parte de las alertas vino del modelo.</li></ul><figure class="fg"><a href="img/portal/portal-15-ml-resumen.webp" target="_blank" rel="noopener"><img src="img/portal/portal-15-ml-resumen.webp" alt="Resumen de Machine Learning" loading="lazy"></a><figcaption>Indicadores del modelo y estado de entrenamiento.</figcaption></figure>`
+        },
+        {
+          titulo: "2. El modelo",
+          contenido: `<p>La tarjeta <strong>El modelo</strong> indica el estado (Activo), la fecha de entrenamiento, los flujos usados y la última vuelta. Se reentrena cada 24 horas con los últimos 7 días, evalúa cada 30 segundos en ventanas de 3 minutos, usa 15 variables por flujo, 200 árboles y emite como máximo una alerta por origen cada 10 minutos.</p>`
+        },
+        {
+          titulo: "3. Reglas contra ML",
+          contenido: `<p>La gráfica <em>Alertas por hora, reglas y ML</em> y la tabla <em>Comparativa</em> muestran cuántas alertas, qué porcentaje, cuántos ataques y qué MTTD tiene cada origen. El MTTD del ML es mayor porque incluye la espera de su ventana: agrupa los flujos anómalos de un origen antes de alertar.</p><figure class="fg"><a href="img/portal/portal-16-ml-reglas-vs-ml.webp" target="_blank" rel="noopener"><img src="img/portal/portal-16-ml-reglas-vs-ml.webp" alt="Comparativa entre reglas y machine learning" loading="lazy"></a><figcaption>Alertas por hora separadas por reglas y ML, y comparativa.</figcaption></figure>`
+        },
+        {
+          titulo: "4. Lo que detectó el ML",
+          contenido: `<p>Muestra las alertas del modelo (regla ML-001) por severidad, por fase MITRE ATT&amp;CK y el top 10 de orígenes anómalos. Pulsa un sector o una barra para ver las alertas correspondientes.</p><figure class="fg"><a href="img/portal/portal-17-ml-detecciones.webp" target="_blank" rel="noopener"><img src="img/portal/portal-17-ml-detecciones.webp" alt="Detecciones del modelo ML" loading="lazy"></a><figcaption>Detecciones por severidad, fase y orígenes anómalos.</figcaption></figure>`
+        },
+        {
+          titulo: "5. Últimas anomalías y puntuación",
+          contenido: `<p>La tabla lista hora, severidad, origen → destino, fase, número de flujos, puntuación y estado. La puntuación es la del modelo: <strong>cuanto más negativa, más se sale de lo normal</strong> (menor que −0,10 se considera media y menor que −0,20, alta).</p><figure class="fg"><a href="img/portal/portal-18-ml-ultimas-anomalias.webp" target="_blank" rel="noopener"><img src="img/portal/portal-18-ml-ultimas-anomalias.webp" alt="Tabla de últimas anomalías" loading="lazy"></a><figcaption>Últimas anomalías con puntuación del modelo.</figcaption></figure><p>Al final, <strong>Atención de las alertas</strong> resume cuántas siguen abiertas y cuántas se resolvieron.</p>`
         }
       ]
     }
